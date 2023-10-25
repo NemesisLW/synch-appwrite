@@ -6,7 +6,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 function Header() {
   return (
     <header>
-      <div className="flex flex-col md:flex-row items-center p-5 bg-gray-300/10 rounder-b-2xl">
+      <div className="flex flex-col md:flex-row items-center p-5 bg-gray-400/10 rounder-b-2xl">
+        {/*Gradient Effect Div*/}
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-br from-[#DCCCA3] to-[#A5D8FF] rounded-md filter blur-3xl opacity-50 -z-50" />
         <Image
           src="/logo.svg"
           alt="Synch Logo"
