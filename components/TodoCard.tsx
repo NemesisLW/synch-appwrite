@@ -65,6 +65,7 @@ function TodoCard({
         <div className="relative h-full w-full rounded-b-md">
           <Image
             alt="Task Image"
+            priority={true}
             src={imageUrl}
             width={400}
             height={200}
