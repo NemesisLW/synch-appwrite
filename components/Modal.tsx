@@ -13,15 +13,15 @@ function Modal() {
     state.closeModal,
   ]);
 
-  const [newTask, setNewTask, addTask, image, setImage] = useBoardStore(
-    (state) => [
+  const [newTaskType, newTask, setNewTask, addTask, image, setImage] =
+    useBoardStore((state) => [
+      state.newTaskType,
       state.newTask,
       state.setNewTask,
       state.addTask,
       state.image,
       state.setImage,
-    ]
-  );
+    ]);
 
   const imagePickerRef = useRef<HTMLInputElement>(null);
 
@@ -30,6 +30,7 @@ function Modal() {
     if (!newTask) return;
 
     //  Add Task Function
+    addTask(newTask, newTaskType, image);
 
     setImage(null);
     closeModal();
