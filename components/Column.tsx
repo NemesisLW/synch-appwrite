@@ -1,7 +1,8 @@
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import TodoCard from "./TodoCard";
 import { PlusCircle } from "lucide-react";
-import { useSearchStore } from "@/store/searchStore";
+import { useSearchStore } from "@/store/SearchStore";
+import { useModalStore } from "@/store/ModalStore";
 
 type Props = {
   id: TypedColumn;
@@ -17,6 +18,7 @@ const idtoColText: { [key in TypedColumn]: string } = {
 
 function Column({ id, todos, index }: Props) {
   const [searchString] = useSearchStore((state) => [state.searchString]);
+  const [openModal] = useModalStore((state) => [state.openModal]);
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -79,7 +81,7 @@ function Column({ id, todos, index }: Props) {
                   {provided.placeholder}
                   <div className="flex items-end justify-end">
                     <button className="text-green-500 hover:text-green-600">
-                      <PlusCircle className="h-7 w-7" />
+                      <PlusCircle onClick={openModal} className="h-7 w-7" />
                     </button>
                   </div>
                 </div>

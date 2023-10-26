@@ -4,7 +4,7 @@ import { Search, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useSearchStore } from "@/store/searchStore";
+import { useSearchStore } from "@/store/SearchStore";
 import { useBoardStore } from "@/store/BoardStore";
 import fetchSummary from "@/lib/fetchSummary";
 
