@@ -36,7 +36,7 @@ function Header() {
               src="https://github.com/nemesisLW.png"
               alt="@nemesislw"
             />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>AD</AvatarFallback>
           </Avatar>
         </div>
       </div>
