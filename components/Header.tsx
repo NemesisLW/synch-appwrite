@@ -2,15 +2,33 @@
 
 import { Search, UserCircle2 } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useSearchStore } from "@/store/searchStore";
+import { useBoardStore } from "@/store/BoardStore";
+import fetchSummary from "@/lib/fetchSummary";
 
 function Header() {
   const [searchString, setSearchString] = useSearchStore((state) => [
     state.searchString,
     state.setSearchString,
   ]);
+  const [board] = useBoardStore((state) => [state.board]);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [summary, setSummary] = useState<string>("");
+
+  useEffect(() => {
+    if (board.columns.size === 0) return;
+    setLoading(true);
+    const getSummary = async () => {
+      const summary = await fetchSummary(board);
+      setSummary(summary);
+      setLoading(false);
+    };
+
+    getSummary();
+  }, [board]);
 
   return (
     <header>
@@ -22,6 +40,7 @@ function Header() {
           alt="Synch Logo"
           width={300}
           height={100}
+          priority={true}
           className="w-44 md:w-56 pb-10 md:pb-0 object-contain"
         />
         <div className="flex items-center space-x-5 flex-1 w-full justify-end">
@@ -54,8 +73,12 @@ function Header() {
       {/* Summary*/}
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
         <p className="flex items-center text-sm font-light pr-5 shadow-xl rounded-xl w-fit bg-white italic max-w-3xl ">
-          <UserCircle2 className="inline-block h-10 w-10 mr-1 px-1" />
-          Summarized text here
+          <UserCircle2
+            className={`inline-block h-10 w-10 mr-1 px-1 ${
+              loading && "animate-spin"
+            }`}
+          />
+          {summary && !loading ? summary : "Summarizing your tasks..."}
         </p>
       </div>
     </header>

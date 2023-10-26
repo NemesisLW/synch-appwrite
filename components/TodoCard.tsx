@@ -1,5 +1,6 @@
 "use client";
 
+import { useBoardStore } from "@/store/BoardStore";
 import { X } from "lucide-react";
 import {
   DraggableProvidedDragHandleProps,
@@ -23,6 +24,8 @@ function TodoCard({
   draggableProps,
   dragHandleProps,
 }: Props) {
+  const [deleteTask] = useBoardStore((state) => [state.deleteTask]);
+
   return (
     <div
       className="bg-white/90 rounded-md space-y-2 drop-shadow-md"
@@ -33,7 +36,10 @@ function TodoCard({
       <div className="flex justify-between items-center p-5">
         <p>{todo.title}</p>
         <button>
-          <X className="text-red-500 hover:text-red-600 ml-5" />
+          <X
+            onClick={() => deleteTask(index, todo, id)}
+            className="text-red-500 hover:text-red-600 ml-5"
+          />
         </button>
       </div>
     </div>
