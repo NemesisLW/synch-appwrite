@@ -1,9 +1,17 @@
+"use client";
+
 import { Search, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { useSearchStore } from "@/store/searchStore";
 
 function Header() {
+  const [searchString, setSearchString] = useSearchStore((state) => [
+    state.searchString,
+    state.setSearchString,
+  ]);
+
   return (
     <header>
       <div className="flex flex-col md:flex-row items-center p-5 bg-gray-400/10 rounder-b-2xl">
@@ -24,6 +32,8 @@ function Header() {
               type="text"
               placeholder="Search...."
               className="flex-1 outline-none p-3"
+              value={searchString}
+              onChange={(e) => setSearchString(e.target.value)}
             />
             <button type="submit" hidden>
               Search
