@@ -63,7 +63,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     set({ newTaskType: columnId });
   },
 
-  async addTask(todo, columnId, image) {
+  async addTask(todo, columnId, image?) {
     let file: null | Image | undefined;
 
     if (image) {
